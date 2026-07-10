@@ -1,0 +1,644 @@
+Create an extraordinary, fully responsive anime-themed birthday celebration website titled:
+
+**“Mishu × Zeno — A Legendary Birthday Saga”**
+
+The entire experience should be heavily inspired by the intense energy, cosmic atmosphere, transformations, battles, and celebratory spirit associated with Dragon Ball–style anime. It must feel like entering an interactive anime episode rather than visiting a normal birthday webpage.
+
+Do not create a generic template or childish birthday page. Build a premium, cinematic, highly immersive website with powerful animations, energy effects, sound design, interactive surprises, dramatic typography, and smooth storytelling.
+
+## Technology
+
+Build the website using:
+
+* React with Vite
+* Tailwind CSS v4.2+
+* Framer Motion for interface animations
+* GSAP with ScrollTrigger for cinematic scroll sequences
+* Howler.js or native Web Audio API for sound controls
+* Lucide React icons
+* Canvas or lightweight particle effects for energy particles
+* Fully responsive design for mobile, tablet, laptop, and large desktop
+* Optimized assets, lazy loading, and smooth performance
+* Clean component-based architecture
+
+## Creative Direction
+
+The visual identity should feel like a combination of:
+
+* Cosmic anime battle arena
+* Dragon energy aura
+* Tournament celebration
+* Floating islands and distant mountains
+* Fiery orange sunsets
+* Deep blue and purple space
+* Golden transformation energy
+* Electric blue lightning
+* Dragon-inspired wish-granting atmosphere
+* High-impact anime title sequences
+
+Use an original fan-inspired visual direction. Do not directly copy official logos, copyrighted artwork, episode scenes, character models, or exact franchise assets. Create original anime warriors, silhouettes, energy spheres, dragon-like cosmic elements, symbols, patterns, and environments.
+
+## Main Color Palette
+
+Use:
+
+* Deep space navy: `#050816`
+* Cosmic purple: `#261447`
+* Energy blue: `#168BFF`
+* Electric cyan: `#49E8FF`
+* Transformation gold: `#FFD43B`
+* Flame orange: `#FF7A00`
+* Crimson red: `#E73131`
+* Soft white: `#F8FAFF`
+
+The background should never look empty. Use layered skies, subtle stars, energy dust, atmospheric glows, speed lines, floating rocks, light streaks, and animated particles.
+
+Avoid excessive glassmorphism, washed-out gradients, cheap neon effects, oversized empty sections, and generic AI-looking card layouts.
+
+## Opening Experience
+
+When the website first opens, show a full-screen cinematic loading sequence.
+
+Display:
+
+**“Gathering Birthday Energy…”**
+
+Create seven glowing mystical energy orbs appearing one by one around the screen. Each orb should arrive with a small burst, vibration, and magical sound.
+
+Show a power meter increasing from `0` to `9000+`.
+
+After loading, display:
+
+**“A Legendary Birthday Saga Is About to Begin”**
+
+Then reveal a large button:
+
+**“Enter the Celebration”**
+
+Browser audio must not start automatically. Music and sound effects should begin only after the visitor presses this button.
+
+When clicked:
+
+* Play an energetic anime-style impact sound
+* Trigger a bright energy flash
+* Create a circular shockwave
+* Animate the page into the hero section
+* Start background music
+* Add a short screen shake
+* Show moving speed lines during the transition
+
+Include a visible sound control in the navigation with:
+
+* Music on/off
+* Sound effects on/off
+* Volume control
+
+Remember the visitor’s sound preference during the session.
+
+## Navigation
+
+Create a floating responsive navigation bar with:
+
+* Mishu × Zeno logo
+* Home
+* Our Saga
+* Memories
+* Power Levels
+* Birthday Wishes
+* Final Wish
+* Music toggle
+
+The navigation should become slightly more solid while scrolling but should not use heavy blur.
+
+On mobile, use an animated compact menu inspired by an anime power scanner.
+
+## Hero Section
+
+Create a full-screen cinematic hero section.
+
+Background:
+
+* Cosmic sky transitioning from dark blue to fiery orange
+* Floating mountains and rocks
+* Animated clouds
+* Distant lightning
+* Slowly moving energy particles
+* A giant original dragon-shaped constellation or glowing dragon silhouette in the distance
+* Two original anime warrior silhouettes standing together on a mountain edge
+
+Main heading:
+
+**“MISHU × ZENO”**
+
+Subtitle:
+
+**“Two Souls. One Legendary Birthday Saga.”**
+
+Additional text:
+
+**“Today, the universe pauses to celebrate a bond stronger than every transformation and brighter than every star.”**
+
+Add two action buttons:
+
+* **Begin the Saga**
+* **Send Your Energy**
+
+Animate the title like a powerful anime episode introduction:
+
+* Letters arrive with speed-line trails
+* Golden light sweeps across the text
+* Subtle shake on impact
+* Aura pulses behind the title
+* Small sparks orbit the letters
+
+Add a floating badge:
+
+**Power Level: Unlimited**
+
+As the user moves the cursor, create subtle energy particles that follow the pointer. On mobile, generate particles around touch points without affecting usability.
+
+## Birthday Countdown
+
+Add a dramatic countdown section presented as an anime battle timer.
+
+Show:
+
+* Days
+* Hours
+* Minutes
+* Seconds
+
+Heading:
+
+**“The Legendary Moment Arrives In”**
+
+Each number should appear inside an energy-powered display.
+
+When the countdown reaches zero:
+
+* Transform the section into “The Celebration Has Begun!”
+* Trigger golden confetti
+* Play a short celebratory power-up sound
+* Release a visual energy wave across the screen
+
+Make the birthday date configurable from a single constants file.
+
+## Our Saga Section
+
+Create a horizontal or scroll-driven story timeline titled:
+
+**“The Mishu × Zeno Saga”**
+
+Divide the journey into anime-inspired chapters:
+
+1. **The First Encounter**
+2. **The Friendship Awakens**
+3. **Training Through Chaos**
+4. **The Legendary Adventures**
+5. **The Birthday Transformation**
+6. **The Saga Continues**
+
+Each chapter should include:
+
+* Date or year
+* Short story
+* Photo placeholder
+* Original anime-style chapter illustration
+* Power-level increase
+* Small animated icon
+* Unique background atmosphere
+
+As each chapter enters the viewport:
+
+* Animate its title dramatically
+* Increase the power meter
+* Trigger subtle sound effects
+* Move floating rocks and energy particles
+* Reveal photos with an anime slash transition
+
+## Memory Universe
+
+Create a large interactive photo gallery titled:
+
+**“Memory Universe”**
+
+The gallery should not be a basic card grid.
+
+Design it as a cosmic universe where photographs appear as:
+
+* Floating energy portals
+* Polaroid-style memory frames
+* Planet-like circular memories
+* Animated manga panels
+* Constellation-connected photographs
+
+Interactions:
+
+* Photos gently float at different speeds
+* Hovering creates an aura around the image
+* Clicking opens a cinematic lightbox
+* The lightbox displays the photo, date, caption, and memory title
+* Allow previous and next navigation
+* Add optional sound feedback
+* Support swipe gestures on mobile
+
+Include placeholder captions such as:
+
+* “The day our saga started”
+* “A memory stronger than any power level”
+* “Partners in every universe”
+* “Our most chaotic adventure”
+* “The smile that defeated every villain”
+
+## Power-Level Comparison
+
+Create a playful section titled:
+
+**“Official Birthday Power Scan”**
+
+Show animated statistics for Mishu and Zeno.
+
+Example statistics:
+
+### Mishu
+
+* Smile Power: 9,999
+* Kindness Level: Infinite
+* Chaos Energy: 8,700
+* Friendship Strength: Maximum
+* Birthday Aura: Legendary
+
+### Zeno
+
+* Loyalty Power: 9,999
+* Adventure Level: Infinite
+* Protective Energy: 9,200
+* Comedy Power: Maximum
+* Celebration Aura: Legendary
+
+Use animated scanner lines, bars, counters, radar visuals, and original anime scouter-inspired interface elements.
+
+Add a final combined result:
+
+**“Combined Power Level: Beyond Every Known Universe”**
+
+When both scanners complete, trigger a fusion-style energy animation that combines the two profiles into one glowing emblem containing:
+
+**M × Z**
+
+## Interactive Energy Challenge
+
+Add a mini interactive experience titled:
+
+**“Charge the Birthday Blast”**
+
+The visitor must repeatedly click or tap a glowing energy sphere.
+
+Each interaction should:
+
+* Increase the power percentage
+* Make the sphere larger
+* Add stronger particles
+* Increase screen vibration slightly
+* Build up the sound intensity
+
+Power stages:
+
+* 0% — Energy Detected
+* 25% — Power Rising
+* 50% — Transformation Started
+* 75% — Legendary Aura
+* 100% — Birthday Blast Ready
+
+At 100%, show a button:
+
+**“Release Birthday Energy”**
+
+On release:
+
+* Launch the energy sphere toward the screen
+* Create a bright but comfortable flash
+* Show a circular shockwave
+* Release confetti and sparks
+* Reveal the message:
+
+**“Happy Birthday, Mishu × Zeno! May Your Saga Become More Legendary Every Year.”**
+
+Include a reduced-motion version for users who prefer fewer animations.
+
+## Birthday Wishes Section
+
+Create a wish wall titled:
+
+**“Messages From Across the Universe”**
+
+Visitors should be able to enter:
+
+* Name
+* Birthday message
+* Optional relationship
+* Optional emoji or reaction
+* Optional profile image
+
+Display wishes as animated energy capsules or cosmic message cards.
+
+Include:
+
+* Character limit
+* Form validation
+* Success animation
+* Local demo storage
+* Clear API integration placeholder for a future backend
+* Responsive masonry-style presentation
+* Filter for newest and most powerful wishes
+
+When a wish is submitted, animate it flying into the wish universe.
+
+## Special Message Section
+
+Create an emotionally powerful section with a calmer atmosphere.
+
+Heading:
+
+**“Not Every Strength Is Measured by a Power Level”**
+
+Use a slowly animated sunset, soft particles, and peaceful background music.
+
+Show this editable message:
+
+“Through every battle, every laugh, every difficult day, and every unforgettable adventure, our bond has continued to grow stronger. Mishu and Zeno are not only names in this story—they are the heart of an entire universe of memories. May this birthday unlock a new transformation filled with happiness, success, peace, adventure, and countless legendary moments.”
+
+Reveal the text line by line as the user scrolls.
+
+Add a button:
+
+**“Unlock the Hidden Message”**
+
+When clicked, reveal a customizable personal letter inside an animated magical scroll or glowing energy capsule.
+
+## Seven-Wish Experience
+
+Create a section featuring seven mystical glowing orbs.
+
+Heading:
+
+**“Collect All Seven Birthday Wishes”**
+
+The visitor should click each orb to reveal one wish:
+
+1. Unlimited happiness
+2. Legendary health
+3. Infinite success
+4. Unbreakable friendship
+5. Powerful confidence
+6. Endless adventures
+7. A future brighter than every star
+
+After collecting all seven:
+
+* Summon an original celestial dragon-like spirit
+* Darken the sky temporarily
+* Add lightning and wind effects
+* Play a magical summoning sound
+* Reveal the final wish:
+
+**“May the bond of Mishu × Zeno remain legendary in every universe.”**
+
+Do not copy an existing copyrighted dragon design. Create an original celestial energy dragon.
+
+## Anime Episode Break
+
+Between major sections, include short episode-title transitions such as:
+
+* “Episode 01 — The Celebration Awakens”
+* “Episode 02 — Memories Beyond Time”
+* “Episode 03 — The Ultimate Power of Friendship”
+* “Final Episode — The Wish That Reached the Stars”
+
+Animate them like dramatic anime title cards using impact sounds, radial light, speed lines, and bold typography.
+
+Keep each transition brief so it does not interrupt navigation.
+
+## Music and Sound Design
+
+Use royalty-free or custom original audio only.
+
+Sound categories:
+
+* Cinematic anime-inspired background music
+* Soft emotional music
+* Energy charging sound
+* Impact sound
+* Lightning sound
+* Magical orb sound
+* Button hover sound
+* Celebration success sound
+* Confetti sound
+
+Audio rules:
+
+* Never autoplay before user interaction
+* Include mute and volume controls
+* Keep volume comfortable
+* Do not play a sound for every tiny movement
+* Pause or reduce music when the browser tab is inactive
+* Allow visitors to disable only effects while keeping music enabled
+
+## Final Celebration Section
+
+Create a visually spectacular final section.
+
+Show Mishu and Zeno’s names surrounded by:
+
+* Golden aura
+* Electric lightning
+* Floating energy fragments
+* Fireworks
+* Confetti
+* Stars
+* Cosmic dragon silhouette
+* Animated birthday cake with energy flames
+
+Main message:
+
+**“HAPPY BIRTHDAY, MISHU × ZENO”**
+
+Supporting message:
+
+**“May your next saga be filled with stronger transformations, unforgettable adventures, unstoppable success, and happiness beyond every universe.”**
+
+Add a button:
+
+**“Make the Final Wish”**
+
+When clicked:
+
+* Ask the visitor to close their eyes and make a wish
+* Display a five-second animated power charge
+* Blow out the digital candles
+* Release fireworks
+* Play a final celebration sound
+* Show:
+
+**“Your Wish Has Been Sent Across the Universe.”**
+
+## Footer
+
+Create a compact cinematic footer with:
+
+**“Crafted with unlimited energy for Mishu × Zeno.”**
+
+Add:
+
+* Replay celebration
+* Return to top
+* Music toggle
+* Share website
+* Copy website link
+* Current year
+
+The replay button should restart the main celebration animations without reloading the page.
+
+## Typography
+
+Use bold original anime-inspired display typography for major headings and a clean modern font for readable content.
+
+Suggested combination:
+
+* Heading: Bangers, Russo One, Black Ops One, or another legally available anime-action font
+* Body: Inter, Manrope, or Plus Jakarta Sans
+
+Do not use official Dragon Ball logo typography or directly recreate its trademarked wordmark.
+
+## Motion Guidelines
+
+Animations should feel intense but polished.
+
+Use:
+
+* Aura pulsation
+* Lightning arcs
+* Energy particles
+* Speed lines
+* Text impact entrances
+* Radial shockwaves
+* Floating rocks
+* Scroll parallax
+* Anime slash reveals
+* Controlled screen shake
+* Power-up sequences
+* Manga panel transitions
+* Cinematic light flashes
+
+Avoid:
+
+* Constant aggressive shaking
+* Animations that block content
+* Excessive motion on mobile
+* Flashing that may cause discomfort
+* Heavy effects that reduce performance
+* Random animations without storytelling purpose
+
+Respect `prefers-reduced-motion`. Provide a simplified experience with static backgrounds, subtle fades, and no screen shaking when reduced motion is enabled.
+
+## Responsive Behaviour
+
+Desktop:
+
+* Cinematic full-screen compositions
+* Deep parallax
+* Large interactive universe layouts
+* Cursor energy effects
+
+Tablet:
+
+* Simplified parallax
+* Balanced section spacing
+* Touch-friendly interactions
+
+Mobile:
+
+* Preserve the complete storytelling experience
+* Reduce particles and background complexity
+* Keep titles readable
+* Use swipeable galleries
+* Make every button at least 44px high
+* Prevent horizontal overflow
+* Avoid text overlapping animated effects
+* Keep audio controls easily accessible
+
+## Accessibility
+
+Include:
+
+* Semantic HTML
+* Keyboard navigation
+* Visible focus states
+* Alt text for all images
+* ARIA labels for sound and interactive controls
+* Sufficient text contrast
+* Reduced-motion support
+* Escape-key support for modals
+* No essential information communicated only through animation or sound
+
+## Content Configuration
+
+Store all editable website data in a central configuration file, including:
+
+* Birthday date
+* Names
+* Hero message
+* Timeline chapters
+* Photo gallery
+* Personal letter
+* Power statistics
+* Seven wishes
+* Music paths
+* Social-sharing information
+
+Use reusable components so photos, messages, dates, and sections can be changed without editing the layout code.
+
+## Suggested Component Structure
+
+* `BirthdayLoader`
+* `AudioProvider`
+* `SoundControls`
+* `AnimeNavbar`
+* `HeroSaga`
+* `BirthdayCountdown`
+* `EpisodeTransition`
+* `SagaTimeline`
+* `MemoryUniverse`
+* `PowerScanner`
+* `EnergyChallenge`
+* `WishWall`
+* `SpecialMessage`
+* `SevenWishOrbs`
+* `FinalCelebration`
+* `CelebrationFooter`
+* `ParticleCanvas`
+* `EnergyCursor`
+* `ReducedMotionProvider`
+
+## Final Quality Requirement
+
+The completed website must feel like a professionally produced interactive anime birthday episode made exclusively for Mishu and Zeno.
+
+It should be:
+
+* Emotional
+* Explosive
+* Cinematic
+* Personal
+* Smooth
+* Premium
+* Memorable
+* Highly responsive
+* Performance optimized
+* Visually coherent
+
+Every section must contribute to the birthday story. Avoid generic feature cards, unnecessary dashboard-style layouts, repetitive gradients, random glowing rectangles, and cheap AI-generated design patterns.
+
+The final visitor experience should feel like:
+
+**Loading energy → Entering an anime universe → Reliving memories → Scanning friendship power → Collecting wishes → Charging birthday energy → Unlocking an emotional message → Releasing the final legendary celebration.**

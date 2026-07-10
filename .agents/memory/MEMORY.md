@@ -1,0 +1,1 @@
+- [Placeholder audio CDN URLs](placeholder-audio-urls.md) — mixkit.co preview URLs return 403 when hotlinked; generate real audio instead.

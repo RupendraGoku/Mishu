@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-space-navy: var(--space-navy);
+  --color-cosmic-purple: var(--cosmic-purple);
+  --color-energy-blue: var(--energy-blue);
+  --color-electric-cyan: var(--electric-cyan);
+  --color-transformation-gold: var(--transformation-gold);
+  --color-flame-orange: var(--flame-orange);
+  --color-crimson-red: var(--crimson-red);
+  --color-soft-white: var(--soft-white);
+
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Bangers', display;
+}
+
+:root {
+  --space-navy: #050816;
+  --cosmic-purple: #261447;
+  --energy-blue: #168BFF;
+  --electric-cyan: #49E8FF;
+  --transformation-gold: #FFD43B;
+  --flame-orange: #FF7A00;
+  --crimson-red: #E73131;
+  --soft-white: #F8FAFF;
+
+  --background: var(--space-navy);
+  --foreground: var(--soft-white);
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+    background-color: var(--space-navy);
+    color: var(--soft-white);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-wider;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px var(--transformation-gold), 0 0 20px var(--flame-orange);
+  }
+  
+  .text-glow-blue {
+    text-shadow: 0 0 10px var(--energy-blue), 0 0 20px var(--electric-cyan);
+  }
+
+  .box-glow {
+    box-shadow: 0 0 15px var(--energy-blue), inset 0 0 10px var(--electric-cyan);
+  }
+  
+  .box-glow-gold {
+    box-shadow: 0 0 15px var(--transformation-gold), inset 0 0 10px var(--flame-orange);
+  }
+
+  .bg-stars {
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 130px 80px, #ffffff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 160px 120px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+  
+  .clip-slant {
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+  }
+  .clip-button {
+    clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--space-navy);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--energy-blue);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--electric-cyan);
+}

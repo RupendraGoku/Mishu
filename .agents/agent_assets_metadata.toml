@@ -1,0 +1,86 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "eOLnI3pD-Hav41u6cg0tC"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_impact.mp3"
+type = "audio"
+title = "saga impact"
+
+[[outputs]]
+id = "SOhoLQMO5AL62ZIsed8la"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_orb.mp3"
+type = "audio"
+title = "saga orb"
+
+[[outputs]]
+id = "xNBc17HvguBvhVEL2HSGm"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_hover.mp3"
+type = "audio"
+title = "saga hover"
+
+[[outputs]]
+id = "PTDVol6ZmaGzXMvd693Th"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_powerup.mp3"
+type = "audio"
+title = "saga powerup"
+
+[[outputs]]
+id = "UvDqM5cins0wUiwRxESLD"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_success.mp3"
+type = "audio"
+title = "saga success"
+
+[[outputs]]
+id = "Irlk61DpkoJAP5vhf06YN"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_energy_charge.mp3"
+type = "audio"
+title = "saga energy charge"
+
+[[outputs]]
+id = "-zuZI7VVlN6Ii0Thi8ndE"
+uri = "file://attached_assets/generated_audio/music_saga_calm.mp3"
+type = "audio"
+title = "saga calm"
+
+[[outputs]]
+id = "QoDjHD1xFe55SXDWc2-fA"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_hover_2.mp3"
+type = "audio"
+title = "saga hover"
+
+[[outputs]]
+id = "OYutf5IBBcPZ4-jqgv4Er"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_impact_2.mp3"
+type = "audio"
+title = "saga impact"
+
+[[outputs]]
+id = "EEewPlUiHDY1P7Nld_fbg"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_success_2.mp3"
+type = "audio"
+title = "saga success"
+
+[[outputs]]
+id = "WWsOuBRCdrbyhPe-P3ETR"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_powerup_2.mp3"
+type = "audio"
+title = "saga powerup"
+
+[[outputs]]
+id = "8ddZzvrzQRUGyvam55mpr"
+uri = "file://attached_assets/generated_audio/sound_effect_saga_orb_2.mp3"
+type = "audio"
+title = "saga orb"
+
+[[outputs]]
+id = "gdztU1NAO0QMBovud4pzk"
+uri = "file://attached_assets/generated_audio/music_saga_calm_2.mp3"
+type = "audio"
+title = "saga calm"
+
+[[outputs]]
+id = "cRHYt0unh2vtgxtNsON46"
+uri = "file://attached_assets/generated_audio/music_saga_background.mp3"
+type = "audio"
+title = "saga background"

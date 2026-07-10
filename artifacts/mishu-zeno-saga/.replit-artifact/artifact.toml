@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Mishu × Zeno — A Legendary Birthday Saga"
+version = "1.0.0"
+id = "artifacts/mishu-zeno-saga"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26184
+
+[services.development]
+run = "pnpm --filter @workspace/mishu-zeno-saga run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mishu-zeno-saga", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mishu-zeno-saga/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26184"
+BASE_PATH = "/"
