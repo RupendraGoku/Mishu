@@ -8,9 +8,36 @@ import { useReducedMotion } from './ReducedMotionProvider';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const floaterAssets = [
+  `${import.meta.env.BASE_URL}floter/f%20(1).png`,
+  `${import.meta.env.BASE_URL}floter/f%20(2).png`,
+  `${import.meta.env.BASE_URL}floter/f%20(3).png`,
+  `${import.meta.env.BASE_URL}floter/f%20(4).png`,
+];
+
+const heroFloaters = [
+  {
+    src: floaterAssets[0],
+    className: 'top-[18%] left-[7%] w-16 sm:w-20 md:w-24 opacity-90 drop-shadow-[0_0_18px_rgba(255,212,59,0.45)]',
+  },
+  {
+    src: floaterAssets[1],
+    className: 'top-[58%] right-[9%] w-20 sm:w-28 md:w-32 opacity-80 drop-shadow-[0_0_20px_rgba(73,232,255,0.35)]',
+  },
+  {
+    src: floaterAssets[2],
+    className: 'bottom-[14%] left-[17%] w-14 sm:w-18 md:w-20 opacity-85 drop-shadow-[0_0_18px_rgba(255,122,0,0.38)]',
+  },
+  {
+    src: floaterAssets[3],
+    className: 'top-[26%] right-[20%] w-12 sm:w-16 md:w-18 opacity-75 drop-shadow-[0_0_16px_rgba(255,212,59,0.35)]',
+  },
+];
+
 export const HeroSaga: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const heroImage = sagaConfig.gallery[7];
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -24,8 +51,8 @@ export const HeroSaga: React.FC = () => {
   useEffect(() => {
     if (prefersReducedMotion) return;
     
-    // Parallax floating rocks with GSAP
-    gsap.to(".floating-rock", {
+    // Parallax themed stickers with GSAP.
+    const floaterTween = gsap.to(".themed-floater", {
       y: "random(-50, 50)",
       x: "random(-20, 20)",
       rotation: "random(-15, 15)",
@@ -35,7 +62,11 @@ export const HeroSaga: React.FC = () => {
       ease: "sine.inOut",
       stagger: 0.2
     });
-  }, []);
+
+    return () => {
+      floaterTween.kill();
+    };
+  }, [prefersReducedMotion]);
 
   const handleBegin = () => {
     playSfx('powerUp');
@@ -49,9 +80,16 @@ export const HeroSaga: React.FC = () => {
 
   return (
     <section id="hero" ref={containerRef} className="relative w-full h-screen overflow-hidden flex items-center justify-center pt-20">
+      <motion.img
+        src={heroImage.src}
+        alt={heroImage.title}
+        className="absolute inset-0 z-0 h-full w-full object-cover opacity-70"
+        style={{ y: yBg, objectPosition: heroImage.position }}
+      />
+
       {/* Dynamic Sky Background */}
       <motion.div 
-        className="absolute inset-0 z-0 bg-gradient-to-b from-space-navy via-cosmic-purple to-flame-orange/20"
+        className="absolute inset-0 z-0 bg-gradient-to-b from-space-navy/95 via-cosmic-purple/70 to-flame-orange/30"
         style={{ y: yBg }}
       />
       
@@ -71,11 +109,19 @@ export const HeroSaga: React.FC = () => {
         </svg>
       </div>
 
-      {/* Floating Rocks */}
+      {/* Themed floaters */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="floating-rock absolute top-[20%] left-[10%] w-16 h-20 bg-space-navy border border-cosmic-purple rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.8)] clip-slant opacity-80" />
-        <div className="floating-rock absolute top-[60%] right-[15%] w-24 h-16 bg-space-navy border border-energy-blue/30 rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.8)] clip-button opacity-70" />
-        <div className="floating-rock absolute bottom-[15%] left-[20%] w-12 h-12 bg-cosmic-purple/50 border border-electric-cyan/20 rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.8)] opacity-60" />
+        {heroFloaters.map((floater, index) => (
+          <img
+            key={floater.src}
+            src={floater.src}
+            alt=""
+            aria-hidden="true"
+            decoding="async"
+            draggable="false"
+            className={`themed-floater absolute h-auto select-none ${floater.className}`}
+          />
+        ))}
       </div>
 
       {/* Ground Silhouette */}
@@ -116,7 +162,7 @@ export const HeroSaga: React.FC = () => {
             </span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display text-transparent bg-clip-text bg-gradient-to-br from-transformation-gold via-flame-orange to-crimson-red filter drop-shadow-[0_0_20px_rgba(255,122,0,0.8)] mb-4 uppercase leading-none transform -skew-x-6">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-saiyan-right text-transparent bg-clip-text bg-gradient-to-br from-transformation-gold via-flame-orange to-crimson-red filter drop-shadow-[0_0_20px_rgba(255,122,0,0.8)] mb-4 uppercase leading-none transform -skew-x-6">
             {sagaConfig.heroMessage.title}
           </h1>
           

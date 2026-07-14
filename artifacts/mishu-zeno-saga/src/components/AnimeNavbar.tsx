@@ -43,7 +43,7 @@ export const AnimeNavbar: React.FC = () => {
         }`}
       >
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-          <div className="font-display text-2xl text-transformation-gold tracking-widest text-glow cursor-pointer" onClick={() => handleNavClick('#hero')}>
+          <div className="font-saiyan-left text-2xl text-transformation-gold tracking-widest text-glow cursor-pointer" onClick={() => handleNavClick('#hero')}>
             {sagaConfig.names.short}
           </div>
 

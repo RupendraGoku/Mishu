@@ -7,6 +7,7 @@ import { useReducedMotion } from './ReducedMotionProvider';
 export const SagaTimeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const timelineBg = `${import.meta.env.BASE_URL}image/bg.jpg`;
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -15,7 +16,16 @@ export const SagaTimeline: React.FC = () => {
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", prefersReducedMotion ? "100%" : "100%"]);
 
   return (
-    <section id="saga" ref={containerRef} className="py-24 relative bg-space-navy">
+    <section id="saga" ref={containerRef} className="py-24 relative bg-space-navy overflow-hidden">
+      <img
+        src={timelineBg}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-55"
+      />
+      <div className="absolute inset-0 bg-space-navy/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-space-navy/45 via-space-navy/10 to-space-navy/55" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(5,8,22,0.62)_92%)]" />
       <div className="container mx-auto px-4 relative z-10">
         
         <div className="text-center mb-20">

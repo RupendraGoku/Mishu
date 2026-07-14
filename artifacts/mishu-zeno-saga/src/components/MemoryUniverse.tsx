@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { sagaConfig } from '../config/saga';
-import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAudio } from './AudioProvider';
 
 export const MemoryUniverse: React.FC = () => {
   const [selectedImg, setSelectedImg] = useState<number | null>(null);
   const { playSfx } = useAudio();
+  const selectedItem = selectedImg !== null ? sagaConfig.gallery[selectedImg] : null;
 
   const handleOpen = (index: number) => {
     playSfx('hover');
@@ -60,7 +61,7 @@ export const MemoryUniverse: React.FC = () => {
         </div>
 
         {/* Gallery Grid / Orbit layout (simplified to responsive masonry-style grid with floating animation) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto p-4">
           {sagaConfig.gallery.map((item, i) => (
             <motion.div
               key={item.id}
@@ -69,14 +70,22 @@ export const MemoryUniverse: React.FC = () => {
               viewport={{ once: true }}
               animate={{ y: [0, -10, 0] }}
               transition={{ delay: i * 0.1, duration: 0.5, y: { repeat: Infinity, duration: 4 + (i % 3), ease: "easeInOut" } }}
-              className={`relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer border-2 bg-cosmic-purple/30 flex flex-col items-center justify-center group ${getColorClass(item.color)}`}
+              className={`relative aspect-[3/4] rounded-lg overflow-hidden cursor-pointer border-2 bg-cosmic-purple/30 flex flex-col items-center justify-center group ${getColorClass(item.color)}`}
               onClick={() => handleOpen(i)}
             >
-              {/* Fake Photo Placeholder */}
-              <div className="absolute inset-0 bg-gradient-to-br from-space-navy/50 to-transparent group-hover:opacity-0 transition-opacity z-10" />
-              <ImageIcon size={48} className="text-soft-white/20 mb-4 z-0" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-space-navy/90 to-transparent z-20 translate-y-full group-hover:translate-y-0 transition-transform">
-                <p className="font-display text-soft-white uppercase tracking-wider text-sm truncate">{item.title}</p>
+              <img
+                src={item.src}
+                alt={item.title}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                style={{ objectPosition: item.position }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-space-navy/10 via-transparent to-space-navy/90 z-10" />
+              <div className="absolute inset-0 border border-white/20 z-20 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 z-20 translate-y-2 group-hover:translate-y-0 transition-transform">
+                <p className="font-display text-soft-white uppercase tracking-wider text-sm line-clamp-2">{item.title}</p>
+                <p className="mt-1 text-xs font-mono uppercase tracking-widest text-electric-cyan">{item.caption}</p>
               </div>
             </motion.div>
           ))}
@@ -85,7 +94,7 @@ export const MemoryUniverse: React.FC = () => {
 
       {/* Lightbox */}
       <AnimatePresence>
-        {selectedImg !== null && (
+        {selectedItem && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -103,11 +112,16 @@ export const MemoryUniverse: React.FC = () => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="relative w-full max-w-4xl bg-cosmic-purple/50 border border-energy-blue/50 rounded-xl overflow-hidden shadow-[0_0_50px_rgba(22,139,255,0.2)] flex flex-col"
+              className="relative w-full max-w-5xl bg-cosmic-purple/50 border border-energy-blue/50 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(22,139,255,0.2)] flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="aspect-video bg-space-navy flex items-center justify-center relative border-b border-energy-blue/30">
-                <ImageIcon size={64} className="text-soft-white/10" />
+              <div className="bg-space-navy flex items-center justify-center relative border-b border-energy-blue/30">
+                <img
+                  src={selectedItem.src}
+                  alt={selectedItem.title}
+                  className="max-h-[75vh] w-full object-contain"
+                  style={{ objectPosition: selectedItem.position }}
+                />
                 <div className="absolute inset-0 flex items-center justify-between px-4">
                   <button onClick={prevImg} className="p-2 bg-space-navy/50 rounded-full hover:bg-energy-blue/30 text-white backdrop-blur-sm">
                     <ChevronLeft size={24} />
@@ -119,10 +133,10 @@ export const MemoryUniverse: React.FC = () => {
               </div>
               <div className="p-6 md:p-8 text-center bg-gradient-to-b from-cosmic-purple/50 to-space-navy">
                 <h3 className="text-2xl md:text-3xl font-display text-transformation-gold uppercase tracking-widest mb-2 text-glow">
-                  {sagaConfig.gallery[selectedImg].title}
+                  {selectedItem.title}
                 </h3>
                 <p className="text-energy-blue font-mono uppercase tracking-widest text-sm">
-                  {sagaConfig.gallery[selectedImg].caption}
+                  {selectedItem.caption}
                 </p>
               </div>
             </motion.div>

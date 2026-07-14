@@ -1,7 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: 'Saiyan Sans';
+  src: url('/saiyan_sans/SaiyanSans.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saiyan Sans Left Oblique';
+  src: url('/saiyan_sans/SaiyanSansLeftOblique.ttf') format('truetype');
+  font-weight: 400;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saiyan Sans Right Oblique';
+  src: url('/saiyan_sans/SaiyanSansRightOblique.ttf') format('truetype');
+  font-weight: 400;
+  font-style: oblique;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -19,7 +43,9 @@
   --color-soft-white: var(--soft-white);
 
   --font-sans: 'Inter', sans-serif;
-  --font-display: 'Bangers', display;
+  --font-display: 'Saiyan Sans', fantasy;
+  --font-saiyan-left: 'Saiyan Sans Left Oblique', 'Saiyan Sans', fantasy;
+  --font-saiyan-right: 'Saiyan Sans Right Oblique', 'Saiyan Sans', fantasy;
 }
 
 :root {
@@ -34,21 +60,75 @@
 
   --background: var(--space-navy);
   --foreground: var(--soft-white);
+
+  --cursor-default: url('/cursor/cx.png') 10 10, auto;
+  --cursor-action: url('/cursor/cxi.png') 48 64, pointer;
+  --cursor-energy: url('/cursor/cxii.png') 30 30, crosshair;
 }
 
 @layer base {
+  html {
+    cursor: var(--cursor-default);
+  }
+
   body {
     @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
     background-color: var(--space-navy);
     color: var(--soft-white);
+    cursor: var(--cursor-default);
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-wider;
+    @apply font-display;
+    letter-spacing: 0;
+  }
+
+  button,
+  a,
+  summary,
+  [role='button'],
+  input[type='button'],
+  input[type='reset'],
+  input[type='submit'] {
+    cursor: var(--cursor-action);
+  }
+
+  input,
+  textarea,
+  select,
+  [contenteditable='true'] {
+    cursor: text;
+  }
+
+  button:disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+
+  #hero,
+  #memories,
+  #final {
+    cursor: var(--cursor-energy);
   }
 }
 
 @layer utilities {
+  .cursor-pointer {
+    cursor: var(--cursor-action);
+  }
+
+  .cursor-saiyan {
+    cursor: var(--cursor-energy);
+  }
+
+  .font-saiyan-left {
+    font-family: var(--font-saiyan-left);
+  }
+
+  .font-saiyan-right {
+    font-family: var(--font-saiyan-right);
+  }
+
   .text-glow {
     text-shadow: 0 0 10px var(--transformation-gold), 0 0 20px var(--flame-orange);
   }

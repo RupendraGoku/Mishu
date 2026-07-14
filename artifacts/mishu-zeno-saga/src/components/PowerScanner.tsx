@@ -39,8 +39,18 @@ export const PowerScanner: React.FC = () => {
   );
 
   return (
-    <section id="power" className="py-24 bg-gradient-to-b from-space-navy to-cosmic-purple relative">
-      <div className="container mx-auto px-4">
+    <section id="power" className="py-24 bg-gradient-to-b from-space-navy to-cosmic-purple relative overflow-hidden">
+      <img
+        src={`${import.meta.env.BASE_URL}image/bg.jpg`}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-55"
+      />
+      <div className="absolute inset-0 bg-space-navy/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-space-navy/45 via-space-navy/10 to-cosmic-purple/55" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(5,8,22,0.62)_92%)]" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-soft-white uppercase tracking-widest flex items-center justify-center gap-4">
             <Scan className="text-electric-cyan" size={40} />

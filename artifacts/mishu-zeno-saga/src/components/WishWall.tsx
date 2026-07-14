@@ -65,8 +65,17 @@ export const WishWall: React.FC = () => {
   };
 
   return (
-    <section id="wishes" className="py-24 bg-space-navy relative">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="wishes" className="py-24 bg-space-navy relative overflow-hidden">
+      <img
+        src={`${import.meta.env.BASE_URL}image/bg3.jpg`}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-60"
+      />
+      <div className="absolute inset-0 bg-space-navy/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-space-navy/45 via-space-navy/10 to-space-navy/55" />
+
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-transformation-gold uppercase tracking-widest text-glow">
             Messages From Across the Universe

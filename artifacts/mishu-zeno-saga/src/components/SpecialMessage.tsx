@@ -7,6 +7,7 @@ import { Lock, Unlock } from 'lucide-react';
 export const SpecialMessage: React.FC = () => {
   const [unlocked, setUnlocked] = useState(false);
   const { playSfx, setBgmTheme } = useAudio();
+  const letterImages = sagaConfig.gallery.slice(5, 7);
 
   const handleUnlock = () => {
     playSfx('powerUp');
@@ -16,6 +17,14 @@ export const SpecialMessage: React.FC = () => {
 
   return (
     <section className="py-32 bg-gradient-to-b from-space-navy via-cosmic-purple to-space-navy relative overflow-hidden">
+      <img
+        src={`${import.meta.env.BASE_URL}image/bg.jpg`}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-50"
+      />
+      <div className="absolute inset-0 bg-space-navy/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-space-navy/50 via-cosmic-purple/20 to-space-navy/55" />
       {/* Soft sunset/peaceful particles effect */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--color-cosmic-purple)_0%,_transparent_70%)] opacity-60" />
       
@@ -40,6 +49,33 @@ export const SpecialMessage: React.FC = () => {
             >
               {sentence}{i < sagaConfig.personalLetter.intro.split('. ').length - 1 ? '.' : ''}
             </motion.p>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
+          {letterImages.map((item, i) => (
+            <motion.figure
+              key={item.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.15, duration: 0.7 }}
+              className="relative aspect-[4/5] overflow-hidden rounded-lg border border-electric-cyan/40 bg-space-navy shadow-[0_0_24px_rgba(73,232,255,0.12)]"
+            >
+              <img
+                src={item.src}
+                alt={item.title}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+                style={{ objectPosition: item.position }}
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-space-navy/95 to-transparent px-4 pb-4 pt-12 text-left">
+                <span className="font-display text-sm uppercase tracking-widest text-transformation-gold">
+                  {item.caption}
+                </span>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
 

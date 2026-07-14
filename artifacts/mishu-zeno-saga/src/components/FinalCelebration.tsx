@@ -10,6 +10,8 @@ export const FinalCelebration: React.FC = () => {
   const [wished, setWished] = useState(false);
   const { playSfx } = useAudio();
   const prefersReducedMotion = useReducedMotion();
+  const finalImage =
+    sagaConfig.gallery.find((item) => item.id === 'img3') ?? sagaConfig.gallery[2];
 
   const handleMakeWish = () => {
     setCharging(true);
@@ -81,7 +83,27 @@ export const FinalCelebration: React.FC = () => {
                 </div>
               </div>
 
-              <h2 className="text-5xl md:text-7xl lg:text-8xl font-display text-transparent bg-clip-text bg-gradient-to-br from-transformation-gold via-flame-orange to-crimson-red filter drop-shadow-[0_0_20px_rgba(255,122,0,0.8)] mb-6 uppercase leading-tight transform -skew-x-6">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative mx-auto mb-10 aspect-[16/10] w-full max-w-2xl overflow-hidden rounded-lg border border-transformation-gold/50 shadow-[0_0_40px_rgba(255,212,59,0.18)]"
+              >
+                <img
+                  src={finalImage.src}
+                  alt={finalImage.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: 'center 18%' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-space-navy/75 via-transparent to-transparent" />
+                <p className="absolute bottom-4 left-4 right-4 font-display text-sm uppercase tracking-widest text-transformation-gold">
+                  {finalImage.caption}
+                </p>
+              </motion.div>
+
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-saiyan-right text-transparent bg-clip-text bg-gradient-to-br from-transformation-gold via-flame-orange to-crimson-red filter drop-shadow-[0_0_20px_rgba(255,122,0,0.8)] mb-6 uppercase leading-tight transform -skew-x-6">
                 HAPPY BIRTHDAY<br />
                 {sagaConfig.names.combined}
               </h2>

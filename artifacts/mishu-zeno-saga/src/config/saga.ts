@@ -1,3 +1,6 @@
+const publicAsset = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
 export const sagaConfig = {
   names: {
     person1: "Mishu",
@@ -62,11 +65,14 @@ export const sagaConfig = {
     }
   ],
   gallery: [
-    { id: "img1", title: "The day our saga started", caption: "Origin Point", color: "blue" },
-    { id: "img2", title: "A memory stronger than any power level", caption: "Maximum Energy", color: "gold" },
-    { id: "img3", title: "Partners in every universe", caption: "Multiverse Bond", color: "purple" },
-    { id: "img4", title: "Our most chaotic adventure", caption: "Chaos Control", color: "orange" },
-    { id: "img5", title: "The smile that defeated every villain", caption: "Victory Pose", color: "cyan" },
+    { id: "img1", title: "The day our saga started", caption: "Origin Point", color: "blue", src: publicAsset("image/img1.jpeg"), position: "center 35%" },
+    { id: "img2", title: "A memory stronger than any power level", caption: "Maximum Energy", color: "gold", src: publicAsset("image/img2.jpeg"), position: "center 35%" },
+    { id: "img3", title: "Partners in every universe", caption: "Multiverse Bond", color: "purple", src: publicAsset("image/img3.jpeg"), position: "center 40%" },
+    { id: "img4", title: "Our most chaotic adventure", caption: "Chaos Control", color: "orange", src: publicAsset("image/img4.jpeg"), position: "center 35%" },
+    { id: "img5", title: "The smile that defeated every villain", caption: "Victory Pose", color: "cyan", src: publicAsset("image/img5.jpeg"), position: "center 25%" },
+    { id: "img6", title: "Energy that lights up the timeline", caption: "Aura Burst", color: "blue", src: publicAsset("image/img6.jpeg"), position: "center 35%" },
+    { id: "img7", title: "A chapter worth replaying forever", caption: "Replay Arc", color: "gold", src: publicAsset("image/img7.jpeg"), position: "center 35%" },
+    { id: "img8", title: "The finale frame of the legend", caption: "Final Form", color: "orange", src: publicAsset("image/img8.jpeg"), position: "center center" },
   ],
   powerStats: {
     person1: {
