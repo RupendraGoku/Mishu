@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { sagaConfig } from '../config/saga';
 import { useAudio } from './AudioProvider';
@@ -10,6 +10,7 @@ export const BirthdayCountdown: React.FC = () => {
   const [isZero, setIsZero] = useState(false);
   const { playSfx } = useAudio();
   const prefersReducedMotion = useReducedMotion();
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     const targetDate = new Date(sagaConfig.birthdayDate).getTime();
@@ -21,8 +22,10 @@ export const BirthdayCountdown: React.FC = () => {
       if (difference <= 0) {
         if (!isZero) {
           setIsZero(true);
-          playSfx('success');
-          fireConfetti();
+          if (initializedRef.current) {
+            playSfx('success');
+            fireConfetti();
+          }
         }
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       } else {
@@ -36,6 +39,7 @@ export const BirthdayCountdown: React.FC = () => {
     };
 
     updateTime();
+    initializedRef.current = true;
     const timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
   }, [isZero, playSfx]);
@@ -69,32 +73,35 @@ export const BirthdayCountdown: React.FC = () => {
   };
 
   const TimeBlock = ({ value, label }: { value: number, label: string }) => (
-    <div className="flex flex-col items-center mx-2 md:mx-4">
-      <div className="relative w-16 h-16 md:w-24 md:h-24 bg-space-navy border-2 border-energy-blue flex items-center justify-center clip-button shadow-[0_0_15px_rgba(22,139,255,0.3)_inset] group">
+    <div className="flex flex-col items-center mx-1 md:mx-4">
+      <div className="scouter-panel energy-border relative w-16 h-16 md:w-24 md:h-24 flex items-center justify-center clip-button group overflow-hidden">
         <div className="absolute inset-0 bg-energy-blue/10 group-hover:bg-energy-blue/20 transition-colors" />
+        <div className="absolute -inset-8 speed-line-field opacity-20" />
+        <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-transformation-gold shadow-[0_0_10px_var(--color-transformation-gold)]" />
         <span className="font-display text-2xl md:text-4xl text-electric-cyan font-bold tracking-wider z-10">
           {value.toString().padStart(2, '0')}
         </span>
       </div>
-      <span className="mt-3 font-mono text-xs md:text-sm text-energy-blue uppercase tracking-widest font-semibold">{label}</span>
+      <span className="mt-3 power-level-text text-[10px] md:text-xs">{label}</span>
     </div>
   );
 
   return (
-    <section className="py-20 relative bg-space-navy/80 border-y border-energy-blue/20 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(22,139,255,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
+    <section id="countdown" className="saga-section py-20 relative bg-space-navy/80 border-y border-energy-blue/20 overflow-hidden">
+      <div className="absolute inset-0 scouter-grid opacity-20" />
       
-      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+      <div className="container mx-auto px-4 saga-content flex flex-col items-center">
         {!isZero ? (
           <>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-2xl md:text-4xl font-display text-transformation-gold text-center mb-12 uppercase tracking-widest text-glow"
+              className="text-2xl md:text-4xl font-display text-transformation-gold text-center mb-4 uppercase tracking-widest text-glow"
             >
               The Legendary Moment Arrives In
             </motion.h2>
+            <p className="power-level-text mb-12 text-[10px] md:text-xs">Temporal scouter synchronized</p>
             
             <motion.div 
               initial={{ scale: 0.9, opacity: 0 }}

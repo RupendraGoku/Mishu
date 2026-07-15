@@ -26,7 +26,7 @@ export const WishWall: React.FC = () => {
       setWishes(JSON.parse(saved));
     } else {
       const initial = [
-        { id: '1', name: 'Bulma (Demo)', message: 'Happy Birthday you legends! Let me know if you need the Dragon Radar.', relation: 'Ally', date: new Date().toISOString() }
+        { id: '1', name: 'Capsule Ally (Demo)', message: 'Happy Birthday you legends! Sending maximum celebration energy from across the universe.', relation: 'Ally', date: new Date().toISOString() }
       ];
       setWishes(initial);
       localStorage.setItem('saga_wishes', JSON.stringify(initial));
@@ -65,7 +65,7 @@ export const WishWall: React.FC = () => {
   };
 
   return (
-    <section id="wishes" className="py-24 bg-space-navy relative overflow-hidden">
+    <section id="wishes" className="saga-section py-24 bg-space-navy relative overflow-hidden">
       <img
         src={`${import.meta.env.BASE_URL}image/bg3.jpg`}
         alt=""
@@ -74,19 +74,20 @@ export const WishWall: React.FC = () => {
       />
       <div className="absolute inset-0 bg-space-navy/35" />
       <div className="absolute inset-0 bg-gradient-to-b from-space-navy/45 via-space-navy/10 to-space-navy/55" />
+      <div className="absolute inset-0 manga-halftone opacity-20" />
 
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 max-w-6xl saga-content">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-transformation-gold uppercase tracking-widest text-glow">
             Messages From Across the Universe
           </h2>
-          <p className="mt-4 font-mono text-sm text-energy-blue uppercase tracking-widest">Transmit Your Energy</p>
+          <p className="mt-4 power-level-text text-[10px] md:text-xs">Transmit Your Energy / Wish frequency open</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Form */}
           <div className="lg:col-span-1">
-            <div className="bg-cosmic-purple/40 border border-energy-blue/30 p-6 rounded-xl backdrop-blur-md sticky top-24">
+            <div className="scouter-panel energy-border p-6 rounded-xl sticky top-24">
               <h3 className="font-display text-2xl text-soft-white uppercase mb-6 flex items-center gap-2">
                 <Send size={24} className="text-electric-cyan" />
                 Send Transmission
@@ -101,7 +102,7 @@ export const WishWall: React.FC = () => {
                     onChange={(e) => setName(e.target.value)}
                     maxLength={30}
                     required
-                    className="w-full bg-space-navy/50 border border-energy-blue/30 rounded px-4 py-2 text-soft-white focus:outline-none focus:border-electric-cyan transition-colors font-sans"
+                    className="w-full bg-space-navy/70 border border-energy-blue/30 rounded px-4 py-2 text-soft-white focus:outline-none focus:border-electric-cyan transition-colors font-sans"
                     placeholder="Your Name"
                   />
                 </div>
@@ -112,7 +113,7 @@ export const WishWall: React.FC = () => {
                     value={relation}
                     onChange={(e) => setRelation(e.target.value)}
                     maxLength={30}
-                    className="w-full bg-space-navy/50 border border-energy-blue/30 rounded px-4 py-2 text-soft-white focus:outline-none focus:border-electric-cyan transition-colors font-sans"
+                    className="w-full bg-space-navy/70 border border-energy-blue/30 rounded px-4 py-2 text-soft-white focus:outline-none focus:border-electric-cyan transition-colors font-sans"
                     placeholder="e.g. Training Partner"
                   />
                 </div>
@@ -124,7 +125,7 @@ export const WishWall: React.FC = () => {
                     maxLength={200}
                     required
                     rows={4}
-                    className="w-full bg-space-navy/50 border border-energy-blue/30 rounded px-4 py-2 text-soft-white focus:outline-none focus:border-electric-cyan transition-colors font-sans resize-none"
+                    className="w-full bg-space-navy/70 border border-energy-blue/30 rounded px-4 py-2 text-soft-white focus:outline-none focus:border-electric-cyan transition-colors font-sans resize-none"
                     placeholder="Send your birthday energy..."
                   />
                   <div className="text-right text-xs text-soft-white/50 mt-1">{message.length}/200</div>
@@ -133,7 +134,7 @@ export const WishWall: React.FC = () => {
                 <button 
                   type="submit"
                   disabled={isSubmitting || !name.trim() || !message.trim()}
-                  className="w-full py-3 bg-energy-blue text-space-navy font-display text-lg uppercase tracking-wider rounded hover:bg-electric-cyan transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 relative overflow-hidden"
+                  className="anime-cta w-full py-3 bg-energy-blue text-space-navy font-display text-lg uppercase tracking-wider hover:bg-electric-cyan transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 relative overflow-hidden aura-cyan"
                 >
                   {isSubmitting ? (
                     <span className="animate-pulse">Transmitting...</span>
@@ -155,9 +156,10 @@ export const WishWall: React.FC = () => {
                     key={wish.id}
                     initial={{ opacity: 0, scale: 0.8, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ type: "spring", bounce: 0.4 }}
-                    className="bg-space-navy/80 border-l-4 border-electric-cyan p-5 rounded-r shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex flex-col relative group hover:bg-cosmic-purple/30 transition-colors"
+                    transition={{ type: "spring", bounce: 0.4, delay: i * 0.04 }}
+                    className="scouter-panel energy-border border-l-4 border-electric-cyan p-5 rounded-r shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex flex-col relative group transition-colors"
                   >
+                    <span className="dragon-orb absolute -left-3 -top-3 h-7 w-7 flex items-center justify-center text-[9px] text-crimson-red">★</span>
                     <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
                       <User size={40} />
                     </div>

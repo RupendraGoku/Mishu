@@ -24,9 +24,13 @@ export const ParticleCanvas: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let isMobile = window.innerWidth < 768;
+    let frameId = 0;
+
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      isMobile = window.innerWidth < 768;
     };
     resize();
     window.addEventListener('resize', resize);
@@ -37,8 +41,10 @@ export const ParticleCanvas: React.FC = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Randomly spawn particles
-      if (Math.random() > 0.6) {
+      const maxParticles = isMobile ? 18 : 36;
+      const spawnChance = isMobile ? 0.94 : 0.84;
+
+      if (particles.length < maxParticles && Math.random() > spawnChance) {
         particles.push({
           x: Math.random() * canvas.width,
           y: canvas.height + 10,
@@ -68,18 +74,21 @@ export const ParticleCanvas: React.FC = () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.globalAlpha = alpha * 0.5;
+        ctx.globalAlpha = alpha * (isMobile ? 0.22 : 0.34);
         ctx.fill();
         ctx.globalAlpha = 1;
       }
 
-      requestAnimationFrame(animate);
+      frameId = requestAnimationFrame(animate);
     };
     
     animate();
 
-    return () => window.removeEventListener('resize', resize);
-  }, []);
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(frameId);
+    };
+  }, [prefersReducedMotion]);
 
   return (
     <canvas 

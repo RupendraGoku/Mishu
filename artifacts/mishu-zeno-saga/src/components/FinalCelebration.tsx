@@ -4,6 +4,7 @@ import { sagaConfig } from '../config/saga';
 import { useAudio } from './AudioProvider';
 import confetti from 'canvas-confetti';
 import { useReducedMotion } from './ReducedMotionProvider';
+import Ballpit from './Ballpit';
 
 export const FinalCelebration: React.FC = () => {
   const [charging, setCharging] = useState(false);
@@ -54,10 +55,36 @@ export const FinalCelebration: React.FC = () => {
   };
 
   return (
-    <section id="final" className="py-32 bg-space-navy relative overflow-hidden min-h-screen flex items-center justify-center">
+    <section id="final" className="saga-section py-32 bg-space-navy relative overflow-hidden min-h-screen flex items-center justify-center">
       {/* Background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--color-cosmic-purple)_0%,_var(--color-space-navy)_80%)]" />
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 z-0 min-h-[500px] overflow-hidden opacity-[0.16] md:opacity-[0.24]">
+          <Ballpit
+            count={100}
+            gravity={0.01}
+            friction={0.9975}
+            wallBounce={0.95}
+            followCursor={false}
+            colors={[0xffd43b, 0xff7a00, 0x168bff, 0xe73131]}
+            ambientIntensity={1.2}
+            lightIntensity={95}
+            minSize={0.05}
+            maxSize={0.2}
+            size0={0.32}
+            maxVelocity={0.045}
+            materialParams={{
+              metalness: 0.35,
+              roughness: 0.35,
+              clearcoat: 1,
+              clearcoatRoughness: 0.12
+            }}
+          />
+        </div>
+      )}
       <div className="absolute inset-0 bg-stars opacity-80" />
+      <div className="absolute inset-0 bg-space-navy/25" />
+      <div className="absolute inset-0 speed-line-field opacity-10" />
       
       {/* Aura container */}
       <motion.div 
@@ -67,13 +94,13 @@ export const FinalCelebration: React.FC = () => {
         className="absolute inset-0 pointer-events-none transition-all duration-1000" 
       />
 
-      <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
+      <div className="container mx-auto px-4 saga-content text-center max-w-4xl">
         
         <AnimatePresence mode="wait">
           {!wished ? (
             <motion.div key="pre-wish" exit={{ opacity: 0, scale: 1.1, filter: "brightness(2)" }} className="relative">
               
-              <div className="mb-12 relative inline-block">
+              <div className="mb-12 relative inline-block aura-cyan rounded-2xl">
                 {/* Cake visualization (abstract energy based) */}
                 <div className="w-32 h-16 bg-gradient-to-t from-energy-blue to-cosmic-purple rounded-t-xl mx-auto relative border-t-2 border-electric-cyan shadow-[0_0_20px_var(--color-energy-blue)]">
                   {/* Energy flames */}
@@ -87,7 +114,7 @@ export const FinalCelebration: React.FC = () => {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="relative mx-auto mb-10 aspect-[16/10] w-full max-w-2xl overflow-hidden rounded-lg border border-transformation-gold/50 shadow-[0_0_40px_rgba(255,212,59,0.18)]"
+                className="energy-border relative mx-auto mb-10 aspect-[16/10] w-full max-w-2xl overflow-hidden rounded-lg border border-transformation-gold/50 shadow-[0_0_40px_rgba(255,212,59,0.18)] aura-gold"
               >
                 <img
                   src={finalImage.src}
@@ -117,16 +144,16 @@ export const FinalCelebration: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleMakeWish}
-                  className="px-10 py-5 bg-transformation-gold text-space-navy font-display text-2xl uppercase tracking-widest clip-button hover:bg-white hover:text-flame-orange transition-colors shadow-[0_0_30px_rgba(255,212,59,0.5)]"
-                >
-                  Make the Final Wish
+                className="anime-cta px-10 py-5 bg-transformation-gold text-space-navy font-display text-2xl uppercase tracking-widest hover:bg-white hover:text-flame-orange transition-colors shadow-[0_0_30px_rgba(255,212,59,0.5)] aura-gold"
+              >
+                Make the Final Wish
                 </motion.button>
               ) : (
                 <div className="flex flex-col items-center">
                   <p className="font-mono text-electric-cyan uppercase tracking-widest mb-4 animate-pulse">
                     Close your eyes. Gathering ultimate energy...
                   </p>
-                  <div className="w-64 h-2 bg-space-navy border border-energy-blue rounded-full overflow-hidden">
+                  <div className="w-64 h-2 bg-space-navy border border-energy-blue rounded-full overflow-hidden aura-cyan">
                     <motion.div 
                       initial={{ width: '0%' }}
                       animate={{ width: '100%' }}
@@ -143,8 +170,9 @@ export const FinalCelebration: React.FC = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="py-20"
+              className="py-20 relative"
             >
+              <div className="absolute inset-0 impact-flash rounded-full bg-electric-cyan/20 blur-2xl" />
               <h2 className="text-4xl md:text-6xl font-display text-electric-cyan text-glow-blue uppercase tracking-widest mb-6">
                 Your Wish Has Been Sent<br />Across the Universe.
               </h2>

@@ -16,7 +16,7 @@ export const SagaTimeline: React.FC = () => {
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", prefersReducedMotion ? "100%" : "100%"]);
 
   return (
-    <section id="saga" ref={containerRef} className="py-24 relative bg-space-navy overflow-hidden">
+    <section id="saga" ref={containerRef} className="saga-section py-24 relative bg-space-navy overflow-hidden">
       <img
         src={timelineBg}
         alt=""
@@ -26,13 +26,14 @@ export const SagaTimeline: React.FC = () => {
       <div className="absolute inset-0 bg-space-navy/35" />
       <div className="absolute inset-0 bg-gradient-to-b from-space-navy/45 via-space-navy/10 to-space-navy/55" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(5,8,22,0.62)_92%)]" />
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="absolute inset-0 manga-halftone opacity-20" />
+      <div className="container mx-auto px-4 saga-content">
         
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-display text-transformation-gold text-glow uppercase tracking-widest">
             The Mishu × Zeno Saga
           </h2>
-          <p className="mt-4 text-energy-blue font-mono uppercase tracking-widest text-sm">Chronicles of a Legendary Bond</p>
+          <p className="mt-4 power-level-text text-[10px] md:text-xs">Chronicles of a Legendary Bond / Training Arc Data</p>
         </div>
 
         <div className="relative max-w-4xl mx-auto">
@@ -57,13 +58,14 @@ export const SagaTimeline: React.FC = () => {
                   className={`relative flex flex-col md:flex-row items-center ${isEven ? 'md:flex-row-reverse' : ''}`}
                 >
                   {/* Node Icon */}
-                  <div className="absolute left-[-2px] md:left-1/2 top-0 md:top-1/2 w-12 h-12 -translate-x-0 md:-translate-x-1/2 md:-translate-y-1/2 bg-space-navy border-2 border-energy-blue rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(22,139,255,0.5)]">
+                  <div className="absolute left-[-2px] md:left-1/2 top-0 md:top-1/2 w-12 h-12 -translate-x-0 md:-translate-x-1/2 md:-translate-y-1/2 bg-space-navy border-2 border-energy-blue rounded-full flex items-center justify-center z-10 aura-cyan">
                     <Swords size={20} className="text-electric-cyan" />
+                    <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-transformation-gold shadow-[0_0_10px_var(--color-transformation-gold)]" />
                   </div>
 
                   {/* Content Card */}
                   <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${isEven ? 'md:pr-16 text-left md:text-right' : 'md:pl-16 text-left'}`}>
-                    <div className="p-6 bg-cosmic-purple/20 border border-energy-blue/30 backdrop-blur-sm rounded-lg hover:border-electric-cyan/60 hover:bg-cosmic-purple/40 transition-all group relative overflow-hidden">
+                    <div className="scouter-panel energy-border p-6 rounded-lg hover:border-electric-cyan/60 transition-all group relative overflow-hidden">
                       {/* Decorative corner */}
                       <div className="absolute top-0 right-0 w-8 h-8 bg-energy-blue/20 clip-slant group-hover:bg-electric-cyan/40 transition-colors" />
                       
@@ -82,8 +84,11 @@ export const SagaTimeline: React.FC = () => {
                         {chapter.story}
                       </p>
 
-                      <div className="inline-flex items-center gap-2 bg-space-navy px-3 py-1 rounded border border-flame-orange/30 text-xs font-mono">
+                      <div className="inline-flex items-center gap-2 bg-space-navy/80 px-3 py-1 rounded border border-flame-orange/40 text-xs font-mono">
                         <span className="text-flame-orange">Power +{chapter.powerIncrease}</span>
+                        <span className="h-1.5 w-16 overflow-hidden rounded-full bg-cosmic-purple">
+                          <span className="block h-full bg-gradient-to-r from-flame-orange to-transformation-gold" style={{ width: `${Math.min(100, chapter.powerIncrease / 100)}%` }} />
+                        </span>
                       </div>
                     </div>
                   </div>

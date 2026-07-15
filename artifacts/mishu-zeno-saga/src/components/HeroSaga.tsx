@@ -5,6 +5,7 @@ import { useAudio } from './AudioProvider';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from './ReducedMotionProvider';
+import BlurText from './BlurText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,7 +80,7 @@ export const HeroSaga: React.FC = () => {
   };
 
   return (
-    <section id="hero" ref={containerRef} className="relative w-full h-screen overflow-hidden flex items-center justify-center pt-20">
+    <section id="hero" ref={containerRef} className="saga-section relative w-full h-screen min-h-[760px] overflow-hidden flex items-center justify-center pt-20">
       <motion.img
         src={heroImage.src}
         alt={heroImage.title}
@@ -92,6 +93,10 @@ export const HeroSaga: React.FC = () => {
         className="absolute inset-0 z-0 bg-gradient-to-b from-space-navy/95 via-cosmic-purple/70 to-flame-orange/30"
         style={{ y: yBg }}
       />
+      <div className="absolute inset-0 z-0 speed-line-field opacity-25" />
+      <div className="absolute inset-x-0 top-0 z-0 h-40 bg-gradient-to-b from-space-navy to-transparent" />
+      <div className="absolute left-1/2 top-[46%] z-0 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric-cyan/10 blur-3xl" />
+      <div className="absolute left-1/2 top-[55%] z-0 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-flame-orange/10 blur-3xl" />
       
       {/* Dragon Constellation / Silhouette */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-30 pointer-events-none mix-blend-screen"
@@ -148,7 +153,7 @@ export const HeroSaga: React.FC = () => {
 
       {/* Main Content */}
       <motion.div 
-        className="relative z-10 text-center px-4 max-w-4xl"
+        className="saga-content text-center px-4 max-w-5xl"
         style={{ y: yText, opacity }}
       >
         <motion.div
@@ -156,15 +161,21 @@ export const HeroSaga: React.FC = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
         >
-          <div className="inline-block mb-6 px-4 py-1 border border-transformation-gold/50 rounded-full bg-space-navy/50 backdrop-blur-md">
-            <span className="font-mono text-sm text-transformation-gold tracking-widest uppercase shadow-[0_0_10px_rgba(255,212,59,0.5)]">
+          <div className="scouter-panel energy-border inline-block mb-6 px-5 py-2 rounded-full">
+            <span className="power-level-text text-[11px] md:text-sm text-transformation-gold">
               Power Level: Unlimited
             </span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-saiyan-right text-transparent bg-clip-text bg-gradient-to-br from-transformation-gold via-flame-orange to-crimson-red filter drop-shadow-[0_0_20px_rgba(255,122,0,0.8)] mb-4 uppercase leading-none transform -skew-x-6">
-            {sagaConfig.heroMessage.title}
-          </h1>
+          <BlurText
+            as="h1"
+            text={sagaConfig.heroMessage.title}
+            animateBy="letters"
+            direction="bottom"
+            delay={45}
+            stepDuration={0.3}
+            className="justify-center text-6xl md:text-8xl lg:text-9xl font-saiyan-right text-transparent bg-clip-text bg-gradient-to-br from-transformation-gold via-flame-orange to-crimson-red filter drop-shadow-[0_0_20px_rgba(255,122,0,0.8)] mb-4 uppercase leading-none transform -skew-x-6"
+          />
           
           <h2 className="text-2xl md:text-3xl font-display text-electric-cyan text-glow-blue mb-6 uppercase tracking-widest">
             {sagaConfig.heroMessage.subtitle}
@@ -173,18 +184,23 @@ export const HeroSaga: React.FC = () => {
           <p className="text-lg md:text-xl text-soft-white/90 max-w-2xl mx-auto mb-10 font-medium leading-relaxed drop-shadow-lg">
             {sagaConfig.heroMessage.description}
           </p>
+
+          <div className="mx-auto mb-8 max-w-lg scouter-panel energy-border px-4 py-3">
+            <p className="power-level-text text-[10px] text-energy-blue">Episode 00 / The Celebration Awakens</p>
+            <p className="mt-1 text-sm text-soft-white/80">Transmission locked. Aura signature stable. Birthday saga ready.</p>
+          </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button 
               onClick={handleBegin}
-              className="group relative px-8 py-4 bg-transformation-gold text-space-navy font-display text-xl uppercase tracking-wider clip-button hover:bg-flame-orange hover:text-white transition-all w-full sm:w-auto"
+              className="anime-cta group relative px-8 py-4 bg-transformation-gold text-space-navy font-display text-xl uppercase tracking-wider hover:bg-flame-orange hover:text-white transition-all w-full sm:w-auto aura-gold"
             >
               <div className="absolute inset-0 w-full h-full border-[3px] border-white/30 clip-button group-hover:scale-105 transition-transform opacity-0 group-hover:opacity-100" />
               Begin the Saga
             </button>
             <button 
               onClick={handleEnergy}
-              className="group relative px-8 py-4 bg-transparent border-2 border-energy-blue text-energy-blue font-display text-xl uppercase tracking-wider clip-slant hover:bg-energy-blue/10 hover:text-electric-cyan transition-all w-full sm:w-auto hover:box-glow"
+              className="anime-cta group relative px-8 py-4 bg-space-navy/60 border-2 border-energy-blue text-energy-blue font-display text-xl uppercase tracking-wider hover:bg-energy-blue/10 hover:text-electric-cyan transition-all w-full sm:w-auto hover:box-glow"
             >
               Send Your Energy
             </button>

@@ -1,0 +1,52 @@
+.magic-rings-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at center, black 0%, black 48%, rgba(0, 0, 0, 0.58) 64%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, black 48%, rgba(0, 0, 0, 0.58) 64%, transparent 82%);
+}
+
+.magic-rings-container::before,
+.magic-rings-container::after {
+  content: "";
+  position: absolute;
+  inset: 16%;
+  border-radius: 9999px;
+  border: 2px solid rgba(73, 232, 255, 0.42);
+  box-shadow:
+    0 0 24px rgba(73, 232, 255, 0.55),
+    inset 0 0 36px rgba(255, 212, 59, 0.28);
+  opacity: 0.45;
+  animation: magic-ring-fallback 3.2s ease-in-out infinite;
+}
+
+.magic-rings-container::after {
+  inset: 28%;
+  border-color: rgba(255, 212, 59, 0.44);
+  animation-delay: -1.4s;
+}
+
+.magic-rings-container canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes magic-ring-fallback {
+  0%,
+  100% {
+    transform: scale(0.86) rotate(-8deg);
+    opacity: 0.42;
+  }
+
+  50% {
+    transform: scale(1.08) rotate(10deg);
+    opacity: 0.68;
+  }
+}

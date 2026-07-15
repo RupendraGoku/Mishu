@@ -12,23 +12,29 @@ export const EpisodeTransition: React.FC<EpisodeTransitionProps> = ({ number, ti
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
-      className="w-full py-16 bg-space-navy flex items-center justify-center relative overflow-hidden"
+      className="w-full py-12 bg-space-navy flex items-center justify-center relative overflow-hidden"
     >
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--color-electric-cyan)_0%,_transparent_70%)]" />
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--color-electric-cyan)_0%,_transparent_70%)]" />
+      <div className="absolute inset-0 manga-halftone opacity-25" />
       
       {/* Speed lines background */}
-      <div className="absolute inset-0 pointer-events-none opacity-20" style={{
-        backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 40px, var(--color-energy-blue) 40px, var(--color-energy-blue) 42px)'
-      }} />
+      <div className="absolute inset-0 pointer-events-none speed-line-field opacity-25" />
 
-      <div className="relative z-10 text-center px-4 border-y-2 border-energy-blue/50 py-8 bg-space-navy/80 backdrop-blur-md w-full max-w-5xl shadow-[0_0_30px_rgba(22,139,255,0.1)]">
+      <div className="scouter-panel energy-border relative z-10 text-center px-4 py-7 w-full max-w-5xl shadow-[0_0_30px_rgba(22,139,255,0.1)]">
+        <motion.div
+          initial={{ x: '-120%', opacity: 0 }}
+          whileInView={{ x: '120%', opacity: [0, 1, 0] }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-transformation-gold/25 to-transparent"
+        />
         <motion.p 
           initial={{ x: -50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-energy-blue font-mono uppercase tracking-[0.3em] text-sm md:text-base mb-2"
+          className="power-level-text text-[10px] md:text-xs mb-2"
         >
-          Episode {number}
+          Episode {number} / Transmission Card
         </motion.p>
         
         <motion.h2 

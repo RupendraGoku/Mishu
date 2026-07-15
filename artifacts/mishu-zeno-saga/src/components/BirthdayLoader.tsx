@@ -8,6 +8,9 @@ export const BirthdayLoader: React.FC<{ onStart: () => void }> = ({ onStart }) =
   const [isLoaded, setIsLoaded] = useState(false);
   const { playSfx } = useAudio();
   const [orbs, setOrbs] = useState<number[]>([]);
+  const progress = Math.min(100, (powerLevel / 9000) * 100);
+  const cloudPosition = Math.min(98, Math.max(2, progress));
+  const cloudAsset = `${import.meta.env.BASE_URL}floter/cloud5.png`;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -85,11 +88,22 @@ export const BirthdayLoader: React.FC<{ onStart: () => void }> = ({ onStart }) =
               </div>
             </div>
             
-            <div className="w-full h-4 bg-gray-900 rounded-full border border-energy-blue/30 overflow-hidden relative">
-              <motion.div 
-                className="h-full bg-energy-blue box-glow"
-                animate={{ width: `${Math.min(100, (powerLevel / 9000) * 100)}%` }}
+            <div className="relative w-full pt-7">
+              <motion.img
+                src={cloudAsset}
+                alt=""
+                aria-hidden="true"
+                draggable="false"
+                className="pointer-events-none absolute top-0 z-20 h-9 w-14 -translate-x-1/2 object-contain drop-shadow-[0_0_14px_rgba(73,232,255,0.75)]"
+                animate={{ left: `${cloudPosition}%` }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
               />
+              <div className="h-4 w-full overflow-hidden rounded-full border border-energy-blue/30 bg-gray-900 relative">
+                <motion.div 
+                  className="h-full bg-energy-blue box-glow"
+                  animate={{ width: `${progress}%` }}
+                />
+              </div>
             </div>
           </motion.div>
         ) : (

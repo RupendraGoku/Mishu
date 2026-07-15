@@ -25,21 +25,21 @@ export const PowerScanner: React.FC = () => {
     <div className="mb-4">
       <div className="flex justify-between text-xs font-mono uppercase text-soft-white mb-1">
         <span>{label}</span>
-        <span className="text-energy-blue">{value}</span>
+        <span className={percentage >= 100 ? 'text-transformation-gold text-glow' : 'text-energy-blue'}>{value}</span>
       </div>
       <div className="h-2 bg-space-navy rounded-full overflow-hidden border border-energy-blue/20">
         <motion.div 
           initial={{ width: 0 }}
           animate={{ width: scanned ? `${percentage}%` : '0%' }}
           transition={{ duration: 1, delay, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-energy-blue to-electric-cyan shadow-[0_0_10px_var(--color-electric-cyan)]"
+          className={`h-full bg-gradient-to-r ${percentage >= 100 ? 'from-flame-orange to-transformation-gold shadow-[0_0_12px_var(--color-transformation-gold)]' : 'from-energy-blue to-electric-cyan shadow-[0_0_10px_var(--color-electric-cyan)]'}`}
         />
       </div>
     </div>
   );
 
   return (
-    <section id="power" className="py-24 bg-gradient-to-b from-space-navy to-cosmic-purple relative overflow-hidden">
+    <section id="power" className="saga-section py-24 bg-gradient-to-b from-space-navy to-cosmic-purple relative overflow-hidden">
       <img
         src={`${import.meta.env.BASE_URL}image/bg.jpg`}
         alt=""
@@ -49,14 +49,16 @@ export const PowerScanner: React.FC = () => {
       <div className="absolute inset-0 bg-space-navy/35" />
       <div className="absolute inset-0 bg-gradient-to-b from-space-navy/45 via-space-navy/10 to-cosmic-purple/55" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(5,8,22,0.62)_92%)]" />
+      <div className="absolute inset-0 scouter-grid opacity-25" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 saga-content">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-soft-white uppercase tracking-widest flex items-center justify-center gap-4">
             <Scan className="text-electric-cyan" size={40} />
             Official Power Scan
             <Scan className="text-electric-cyan" size={40} />
           </h2>
+          <p className="mt-4 power-level-text text-[10px] md:text-xs">Dual subject scouter analysis</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16 relative">
@@ -73,7 +75,7 @@ export const PowerScanner: React.FC = () => {
           </AnimatePresence>
 
           {/* Profile 1 */}
-          <div className="bg-space-navy/60 border border-energy-blue/30 p-6 rounded-lg backdrop-blur-sm relative overflow-hidden">
+          <div className="scouter-panel energy-border p-6 rounded-lg relative overflow-hidden">
             <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
                <Activity size={120} />
             </div>
@@ -88,7 +90,7 @@ export const PowerScanner: React.FC = () => {
           </div>
 
           {/* Profile 2 */}
-          <div className="bg-space-navy/60 border border-flame-orange/30 p-6 rounded-lg backdrop-blur-sm relative overflow-hidden">
+          <div className="scouter-panel energy-border p-6 rounded-lg relative overflow-hidden border-flame-orange/40">
             <div className="absolute top-0 right-0 opacity-10 pointer-events-none text-flame-orange">
                <Activity size={120} />
             </div>
@@ -108,7 +110,7 @@ export const PowerScanner: React.FC = () => {
             <button 
               onClick={handleScan}
               disabled={scanning}
-              className="px-8 py-4 bg-energy-blue text-space-navy font-display text-xl uppercase tracking-widest clip-button hover:bg-electric-cyan transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative"
+              className="anime-cta px-8 py-4 bg-energy-blue text-space-navy font-display text-xl uppercase tracking-widest hover:bg-electric-cyan transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative aura-cyan"
             >
               {scanning ? 'Scanning...' : 'Initialize Scan'}
               {scanning && <div className="absolute inset-0 bg-white/20 animate-pulse" />}

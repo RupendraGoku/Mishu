@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from './AudioProvider';
 import confetti from 'canvas-confetti';
 import { useReducedMotion } from './ReducedMotionProvider';
+import MagicRings from './MagicRings';
 
 export const EnergyChallenge: React.FC = () => {
   const [power, setPower] = useState(0);
   const [released, setReleased] = useState(false);
+  const [pulseId, setPulseId] = useState(0);
   const { playSfx } = useAudio();
   const prefersReducedMotion = useReducedMotion();
 
@@ -21,6 +23,7 @@ export const EnergyChallenge: React.FC = () => {
     playSfx('hover');
     
     if (!prefersReducedMotion) {
+      setPulseId(Date.now());
       // Add subtle screen shake via CSS class on body temporarily
       document.body.style.transform = `translate(${Math.random()*4-2}px, ${Math.random()*4-2}px)`;
       setTimeout(() => { document.body.style.transform = 'none'; }, 50);
@@ -49,14 +52,41 @@ export const EnergyChallenge: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-space-navy relative flex items-center justify-center overflow-hidden border-y border-energy-blue/20">
+    <section className="saga-section py-24 bg-space-navy relative flex items-center justify-center overflow-hidden border-y border-energy-blue/20">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--color-cosmic-purple)_0%,_var(--color-space-navy)_70%)] opacity-50" />
+      <div className="absolute inset-0 scouter-grid opacity-15" />
+      {!prefersReducedMotion && (
+        <div className="absolute left-1/2 top-[54%] z-[1] h-[440px] w-screen -translate-x-1/2 -translate-y-1/2 opacity-75 md:h-[620px]">
+          <MagicRings
+            color="#49E8FF"
+            colorTwo="#FFD43B"
+            speed={1.1 + power / 140}
+            ringCount={7}
+            attenuation={9.2}
+            lineThickness={5.2}
+            baseRadius={0.14}
+            radiusStep={0.074}
+            scaleRate={0.28 + power / 320}
+            opacity={0.78}
+            noiseAmount={0}
+            rotation={-18}
+            ringGap={1.18}
+            fadeIn={0.25}
+            fadeOut={1.05}
+            followMouse
+            mouseInfluence={0.08}
+            hoverScale={1.08}
+            parallax={0.025}
+            blur={released ? 0.4 : 0}
+          />
+        </div>
+      )}
       
-      <div className="container mx-auto px-4 relative z-10 text-center">
+      <div className="container mx-auto px-4 saga-content text-center">
         <h2 className="text-3xl md:text-5xl font-display text-electric-cyan text-glow-blue uppercase tracking-widest mb-4">
           Charge the Birthday Blast
         </h2>
-        <p className="font-mono text-sm text-energy-blue uppercase tracking-widest mb-12">
+        <p className="power-level-text text-[10px] md:text-xs mb-12">
           Tap the core to gather energy
         </p>
 
@@ -70,8 +100,31 @@ export const EnergyChallenge: React.FC = () => {
                 scale: 1 + (power / 100) * 0.5,
                 filter: `drop-shadow(0 0 ${20 + power}px var(--color-electric-cyan))`
               }}
-              className="relative w-32 h-32 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-electric-cyan to-energy-blue flex items-center justify-center overflow-hidden mb-12"
+              className="relative w-32 h-32 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-electric-cyan to-energy-blue flex items-center justify-center overflow-hidden mb-12 aura-cyan"
             >
+              <AnimatePresence>
+                {pulseId > 0 && (
+                  <motion.div
+                    key={pulseId}
+                    initial={{ scale: 0.8, opacity: 0.85 }}
+                    animate={{ scale: 2.4, opacity: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.75, ease: 'easeOut' }}
+                    className="absolute inset-0 rounded-full border-2 border-transformation-gold"
+                  />
+                )}
+              </AnimatePresence>
+              {[0, 1, 2, 3].map((spark) => (
+                <span
+                  key={spark}
+                  className="ki-spark"
+                  style={{
+                    left: `${18 + spark * 19}%`,
+                    top: `${10 + (spark % 2) * 70}%`,
+                    animationDelay: `${spark * 0.35}s`,
+                  }}
+                />
+              ))}
               <div className="absolute inset-0 bg-white/20 animate-pulse" />
               <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-space-navy/50 to-transparent mix-blend-overlay" />
               <span className="relative font-display text-3xl md:text-5xl text-white drop-shadow-md">
@@ -79,7 +132,7 @@ export const EnergyChallenge: React.FC = () => {
               </span>
             </motion.button>
 
-            <div className="h-2 w-full max-w-md bg-space-navy rounded-full border border-energy-blue/30 overflow-hidden mb-4">
+            <div className="h-2 w-full max-w-md bg-space-navy rounded-full border border-energy-blue/30 overflow-hidden mb-4 aura-cyan">
               <motion.div 
                 className="h-full bg-electric-cyan shadow-[0_0_10px_var(--color-electric-cyan)]"
                 animate={{ width: `${power}%` }}
@@ -96,7 +149,7 @@ export const EnergyChallenge: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   onClick={handleRelease}
-                  className="px-8 py-4 bg-flame-orange text-white font-display text-2xl uppercase tracking-widest clip-slant hover:bg-transformation-gold hover:text-space-navy transition-colors animate-pulse"
+                  className="anime-cta px-8 py-4 bg-flame-orange text-white font-display text-2xl uppercase tracking-widest hover:bg-transformation-gold hover:text-space-navy transition-colors animate-pulse aura-gold"
                 >
                   Release Birthday Energy
                 </motion.button>
@@ -108,8 +161,9 @@ export const EnergyChallenge: React.FC = () => {
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", bounce: 0.5 }}
-            className="py-12"
+            className="py-12 relative"
           >
+            <div className="absolute inset-0 impact-flash rounded-full bg-transformation-gold/20 blur-xl" />
             <h3 className="text-3xl md:text-5xl font-display text-transformation-gold uppercase tracking-widest mb-4 leading-tight text-glow">
               Happy Birthday, Mishu × Zeno!
             </h3>
