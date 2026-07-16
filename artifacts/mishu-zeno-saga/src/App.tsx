@@ -29,11 +29,10 @@ const hasBirthdayUnlocked = () => {
 
 function App() {
   const [unlocked, setUnlocked] = useState(hasBirthdayUnlocked);
-  const [started, setStarted] = useState(hasBirthdayUnlocked);
+  const [started, setStarted] = useState(false);
 
   const handleBirthdayUnlock = useCallback(() => {
     setUnlocked(true);
-    setStarted(true);
   }, []);
 
   return (
