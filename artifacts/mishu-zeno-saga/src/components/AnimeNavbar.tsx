@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { sagaConfig } from '../config/saga';
 import { useAudio } from './AudioProvider';
+import { scrollToSection } from '../lib/scrollToSection';
 
 export const AnimeNavbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -52,10 +53,7 @@ export const AnimeNavbar: React.FC = () => {
   const handleNavClick = (href: string) => {
     playSfx('hover');
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection(href);
   };
 
   return (
@@ -93,6 +91,7 @@ export const AnimeNavbar: React.FC = () => {
 
           {/* Mobile Toggle */}
           <button 
+            type="button"
             aria-label="Open scouter navigation"
             className="md:hidden text-energy-blue aura-cyan rounded-full p-1"
             onClick={() => {
@@ -118,7 +117,7 @@ export const AnimeNavbar: React.FC = () => {
             <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: 'linear-gradient(transparent 50%, rgba(22, 139, 255, 0.1) 50%)', backgroundSize: '100% 4px' }} />
             
             <div className="p-6 flex justify-end">
-              <button onClick={() => { playSfx('hover'); setMobileOpen(false); }} className="text-electric-cyan">
+              <button type="button" onClick={() => { playSfx('hover'); setMobileOpen(false); }} className="text-electric-cyan">
                 <X size={40} />
               </button>
             </div>

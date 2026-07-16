@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from './ReducedMotionProvider';
 import BlurText from './BlurText';
+import { scrollToSection } from '../lib/scrollToSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,12 +72,12 @@ export const HeroSaga: React.FC = () => {
 
   const handleBegin = () => {
     playSfx('powerUp');
-    document.querySelector('#saga')?.scrollIntoView({ behavior: 'smooth' });
+    scrollToSection('#saga');
   };
 
   const handleEnergy = () => {
     playSfx('energyCharge');
-    document.querySelector('#wishes')?.scrollIntoView({ behavior: 'smooth' });
+    scrollToSection('#wishes');
   };
 
   return (
@@ -192,15 +193,17 @@ export const HeroSaga: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button 
+              type="button"
               onClick={handleBegin}
-              className="anime-cta group relative px-8 py-4 bg-transformation-gold text-space-navy font-display text-xl uppercase tracking-wider hover:bg-flame-orange hover:text-white transition-all w-full sm:w-auto aura-gold"
+              className="anime-cta group relative px-8 py-4 bg-transformation-gold text-space-navy font-display text-xl uppercase tracking-wider hover:bg-flame-orange hover:text-white transition-all w-full sm:w-auto aura-gold touch-manipulation"
             >
               <div className="absolute inset-0 w-full h-full border-[3px] border-white/30 clip-button group-hover:scale-105 transition-transform opacity-0 group-hover:opacity-100" />
               Begin the Saga
             </button>
             <button 
+              type="button"
               onClick={handleEnergy}
-              className="anime-cta group relative px-8 py-4 bg-space-navy/60 border-2 border-energy-blue text-energy-blue font-display text-xl uppercase tracking-wider hover:bg-energy-blue/10 hover:text-electric-cyan transition-all w-full sm:w-auto hover:box-glow"
+              className="anime-cta group relative px-8 py-4 bg-space-navy/60 border-2 border-energy-blue text-energy-blue font-display text-xl uppercase tracking-wider hover:bg-energy-blue/10 hover:text-electric-cyan transition-all w-full sm:w-auto hover:box-glow touch-manipulation"
             >
               Send Your Energy
             </button>
