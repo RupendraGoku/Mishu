@@ -52,14 +52,17 @@ const burstRays = Array.from({ length: 16 }, (_, index) => {
   };
 });
 
+const MANUAL_UNLOCK_TAP_COUNT = 7;
+
 export const BirthdayGiftGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock }) => {
   const prefersReducedMotion = useReducedMotion();
   const targetTime = useMemo(() => new Date(sagaConfig.birthdayDate).getTime(), []);
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(targetTime));
   const [isOpening, setIsOpening] = useState(false);
   const [burstKey, setBurstKey] = useState(0);
+  const [manualTapCount, setManualTapCount] = useState(0);
   const unlockStartedRef = useRef(false);
-  const lastTapRef = useRef(0);
+  const manualTapCountRef = useRef(0);
   const timeoutRef = useRef<number | null>(null);
 
   const openGift = useCallback(() => {
@@ -100,16 +103,25 @@ export const BirthdayGiftGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock 
     );
   }, [onUnlock, prefersReducedMotion]);
 
-  const handleGiftPointerUp = useCallback(
-    (event: React.PointerEvent<HTMLButtonElement>) => {
-      if (isOpening) return;
+  const registerManualUnlockTap = useCallback(
+    (
+      event?:
+        | React.PointerEvent<HTMLButtonElement>
+        | React.KeyboardEvent<HTMLButtonElement>,
+    ) => {
+      if (isOpening || unlockStartedRef.current) return;
 
-      const now = window.performance.now();
-      const isDoubleTap = now - lastTapRef.current <= 380;
-      lastTapRef.current = isDoubleTap ? 0 : now;
+      event?.preventDefault();
 
-      if (isDoubleTap) {
-        event.preventDefault();
+      const nextTapCount = Math.min(
+        MANUAL_UNLOCK_TAP_COUNT,
+        manualTapCountRef.current + 1,
+      );
+
+      manualTapCountRef.current = nextTapCount;
+      setManualTapCount(nextTapCount);
+
+      if (nextTapCount >= MANUAL_UNLOCK_TAP_COUNT) {
         openGift();
       }
     },
@@ -119,11 +131,11 @@ export const BirthdayGiftGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock 
   const handleGiftKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>) => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (event.repeat) return;
 
-      event.preventDefault();
-      openGift();
+      registerManualUnlockTap(event);
     },
-    [openGift],
+    [registerManualUnlockTap],
   );
 
   useEffect(() => {
@@ -168,13 +180,9 @@ export const BirthdayGiftGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock 
 
         <motion.button
           type="button"
-          aria-label="Double tap the birthday gift to open it now"
+          aria-label={`Tap the birthday gift ${MANUAL_UNLOCK_TAP_COUNT} times to open it now`}
           className="relative mb-8 h-52 w-56 appearance-none bg-transparent p-0 outline-none md:h-64 md:w-72"
-          onPointerUp={handleGiftPointerUp}
-          onDoubleClick={(event) => {
-            event.preventDefault();
-            openGift();
-          }}
+          onPointerUp={registerManualUnlockTap}
           onKeyDown={handleGiftKeyDown}
           whileTap={isOpening ? undefined : { scale: 0.96 }}
         >
@@ -248,7 +256,9 @@ export const BirthdayGiftGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock 
           className="w-full"
         >
           <p className="mb-3 power-level-text text-[10px] md:text-xs">
-            Temporal scouter locked on midnight
+            {manualTapCount > 0
+              ? `Manual override charge ${manualTapCount}/${MANUAL_UNLOCK_TAP_COUNT}`
+              : 'Temporal scouter locked on midnight'}
           </p>
           <h1 className="mx-auto mb-5 max-w-4xl font-display text-4xl leading-tight text-transformation-gold text-glow md:text-7xl">
             {isOpening ? 'Birthday Gift Opening' : 'Birthday Saga Unlocks Soon'}
