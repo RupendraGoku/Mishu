@@ -8,7 +8,8 @@ export const sagaConfig = {
     combined: "MISHU × ZENO",
     short: "M × Z",
   },
-  birthdayDate: "2025-05-15T00:00:00Z", // Change this to the actual date
+  birthdayDate: "2026-07-17T00:00:00+05:30",
+  birthdayUnlockLabel: "17 July 2026 - 12:00 AM IST",
   heroMessage: {
     title: "MISHU × ZENO",
     subtitle: "Two Souls. One Legendary Birthday Saga.",
