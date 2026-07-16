@@ -536,31 +536,27 @@ function createPointerData(options: Partial<PointerData> & { domElement: HTMLEle
   };
   if (!pointerMap.has(options.domElement)) {
     pointerMap.set(options.domElement, defaultData);
-    if (!globalPointerActive) {
-      document.body.addEventListener('pointermove', onPointerMove as EventListener);
-      document.body.addEventListener('pointerleave', onPointerLeave as EventListener);
-      document.body.addEventListener('click', onPointerClick as EventListener);
+    options.domElement.addEventListener('pointermove', onPointerMove as EventListener);
+    options.domElement.addEventListener('pointerleave', onPointerLeave as EventListener);
+    options.domElement.addEventListener('click', onPointerClick as EventListener);
 
-      document.body.addEventListener('touchstart', onTouchStart as EventListener, { passive: false });
-      document.body.addEventListener('touchmove', onTouchMove as EventListener, { passive: false });
-      document.body.addEventListener('touchend', onTouchEnd as EventListener, { passive: false });
-      document.body.addEventListener('touchcancel', onTouchEnd as EventListener, { passive: false });
-      globalPointerActive = true;
-    }
+    options.domElement.addEventListener('touchstart', onTouchStart as EventListener, { passive: false });
+    options.domElement.addEventListener('touchmove', onTouchMove as EventListener, { passive: false });
+    options.domElement.addEventListener('touchend', onTouchEnd as EventListener, { passive: false });
+    options.domElement.addEventListener('touchcancel', onTouchEnd as EventListener, { passive: false });
+    globalPointerActive = pointerMap.size > 0;
   }
   defaultData.dispose = () => {
     pointerMap.delete(options.domElement);
-    if (pointerMap.size === 0) {
-      document.body.removeEventListener('pointermove', onPointerMove as EventListener);
-      document.body.removeEventListener('pointerleave', onPointerLeave as EventListener);
-      document.body.removeEventListener('click', onPointerClick as EventListener);
+    options.domElement.removeEventListener('pointermove', onPointerMove as EventListener);
+    options.domElement.removeEventListener('pointerleave', onPointerLeave as EventListener);
+    options.domElement.removeEventListener('click', onPointerClick as EventListener);
 
-      document.body.removeEventListener('touchstart', onTouchStart as EventListener);
-      document.body.removeEventListener('touchmove', onTouchMove as EventListener);
-      document.body.removeEventListener('touchend', onTouchEnd as EventListener);
-      document.body.removeEventListener('touchcancel', onTouchEnd as EventListener);
-      globalPointerActive = false;
-    }
+    options.domElement.removeEventListener('touchstart', onTouchStart as EventListener);
+    options.domElement.removeEventListener('touchmove', onTouchMove as EventListener);
+    options.domElement.removeEventListener('touchend', onTouchEnd as EventListener);
+    options.domElement.removeEventListener('touchcancel', onTouchEnd as EventListener);
+    globalPointerActive = pointerMap.size > 0;
   };
   return defaultData;
 }
